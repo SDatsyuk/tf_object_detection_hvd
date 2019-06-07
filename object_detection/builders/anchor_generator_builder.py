@@ -19,7 +19,7 @@ from object_detection.anchor_generators import grid_anchor_generator
 from object_detection.anchor_generators import multiple_grid_anchor_generator
 from object_detection.anchor_generators import multiscale_grid_anchor_generator
 from object_detection.protos import anchor_generator_pb2
- 
+
 
 def build(anchor_generator_config):
   """Builds an anchor generator based on the config.

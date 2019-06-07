@@ -31,10 +31,13 @@ from object_detection.protos import train_pb2
 
 def get_image_resizer_config(model_config):
   """Returns the image resizer config from a model config.
+
   Args:
     model_config: A model_pb2.DetectionModel.
+
   Returns:
     An image_resizer_pb2.ImageResizer.
+
   Raises:
     ValueError: If the model type is not recognized.
   """
@@ -49,11 +52,14 @@ def get_image_resizer_config(model_config):
 
 def get_spatial_image_size(image_resizer_config):
   """Returns expected spatial size of the output image from a given config.
+
   Args:
     image_resizer_config: An image_resizer_pb2.ImageResizer.
+
   Returns:
     A list of two integers of the form [height, width]. `height` and `width` are
     set  -1 if they cannot be determined during graph construction.
+
   Raises:
     ValueError: If the model type is not recognized.
   """
@@ -72,11 +78,13 @@ def get_spatial_image_size(image_resizer_config):
 
 def get_configs_from_pipeline_file(pipeline_config_path, config_override=None):
   """Reads config from a file containing pipeline_pb2.TrainEvalPipelineConfig.
+
   Args:
     pipeline_config_path: Path to pipeline_pb2.TrainEvalPipelineConfig text
       proto.
     config_override: A pipeline_pb2.TrainEvalPipelineConfig text proto to
       override pipeline_config_path.
+
   Returns:
     Dictionary of configuration objects. Keys are `model`, `train_config`,
       `train_input_config`, `eval_config`, `eval_input_config`. Value are the
@@ -93,8 +101,10 @@ def get_configs_from_pipeline_file(pipeline_config_path, config_override=None):
 
 def create_configs_from_pipeline_proto(pipeline_config):
   """Creates a configs dictionary from pipeline_pb2.TrainEvalPipelineConfig.
+
   Args:
     pipeline_config: pipeline_pb2.TrainEvalPipelineConfig proto object.
+
   Returns:
     Dictionary of configuration objects. Keys are `model`, `train_config`,
       `train_input_config`, `eval_config`, `eval_input_configs`. Value are
@@ -119,8 +129,10 @@ def create_configs_from_pipeline_proto(pipeline_config):
 
 def get_graph_rewriter_config_from_file(graph_rewriter_config_file):
   """Parses config for graph rewriter.
+
   Args:
     graph_rewriter_config_file: file path to the graph rewriter config.
+
   Returns:
     graph_rewriter_pb2.GraphRewriter proto
   """
@@ -132,10 +144,13 @@ def get_graph_rewriter_config_from_file(graph_rewriter_config_file):
 
 def create_pipeline_proto_from_configs(configs):
   """Creates a pipeline_pb2.TrainEvalPipelineConfig from configs dictionary.
+
   This function performs the inverse operation of
   create_configs_from_pipeline_proto().
+
   Args:
     configs: Dictionary of configs. See get_configs_from_pipeline_file().
+
   Returns:
     A fully populated pipeline_pb2.TrainEvalPipelineConfig.
   """
@@ -152,6 +167,7 @@ def create_pipeline_proto_from_configs(configs):
 
 def save_pipeline_config(pipeline_config, directory):
   """Saves a pipeline config text file to disk.
+
   Args:
     pipeline_config: A pipeline_pb2.TrainEvalPipelineConfig.
     directory: The model directory into which the pipeline config file will be
@@ -174,6 +190,7 @@ def get_configs_from_multiple_files(model_config_path="",
                                     eval_input_config_path="",
                                     graph_rewriter_config_path=""):
   """Reads training configuration from multiple config files.
+
   Args:
     model_config_path: Path to model_pb2.DetectionModel.
     train_config_path: Path to train_pb2.TrainConfig.
@@ -181,6 +198,7 @@ def get_configs_from_multiple_files(model_config_path="",
     eval_config_path: Path to eval_pb2.EvalConfig.
     eval_input_config_path: Path to input_reader_pb2.InputReader.
     graph_rewriter_config_path: Path to graph_rewriter_pb2.GraphRewriter.
+
   Returns:
     Dictionary of configuration objects. Keys are `model`, `train_config`,
       `train_input_config`, `eval_config`, `eval_input_config`. Key/Values are
@@ -226,10 +244,13 @@ def get_configs_from_multiple_files(model_config_path="",
 
 def get_number_of_classes(model_config):
   """Returns the number of classes for a detection model.
+
   Args:
     model_config: A model_pb2.DetectionModel.
+
   Returns:
     Number of classes.
+
   Raises:
     ValueError: If the model type is not recognized.
   """
@@ -244,8 +265,10 @@ def get_number_of_classes(model_config):
 
 def get_optimizer_type(train_config):
   """Returns the optimizer type for training.
+
   Args:
     train_config: A train_pb2.TrainConfig.
+
   Returns:
     The type of the optimizer
   """
@@ -254,8 +277,10 @@ def get_optimizer_type(train_config):
 
 def get_learning_rate_type(optimizer_config):
   """Returns the learning rate type for training.
+
   Args:
     optimizer_config: An optimizer_pb2.Optimizer.
+
   Returns:
     The type of the learning rate.
   """
@@ -277,8 +302,10 @@ def _is_generic_key(key):
 
 def _check_and_convert_legacy_input_config_key(key):
   """Checks key and converts legacy input config update to specific update.
+
   Args:
     key: string indicates the target of update operation.
+
   Returns:
     is_valid_input_config_key: A boolean indicating whether the input key is to
       update input config(s).
@@ -307,6 +334,12 @@ def _check_and_convert_legacy_input_config_key(key):
   elif field_name == "eval_input_path":
     key_name = "eval_input_configs"
     field_name = "input_path"
+  elif field_name == "train_input_path":
+    key_name = "train_input_config"
+    field_name = "input_path"
+  elif field_name == "eval_input_path":
+    key_name = "eval_input_configs"
+    field_name = "input_path"
   elif field_name == "append_train_input_path":
     key_name = "train_input_config"
     field_name = "input_path"
@@ -321,10 +354,12 @@ def _check_and_convert_legacy_input_config_key(key):
 
 def check_and_parse_input_config_key(configs, key):
   """Checks key and returns specific fields if key is valid input config update.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
     key: string indicates the target of update operation.
+
   Returns:
     is_valid_input_config_key: A boolean indicate whether the input key is to
       update input config(s).
@@ -335,6 +370,7 @@ def check_and_parse_input_config_key(configs, key):
       is_valid_input_config_key is false.
     field_name: the field name in input config. `key` itself if
       is_valid_input_config_key is false.
+
   Raises:
     ValueError: when the input key format doesn't match any known formats.
     ValueError: if key_name doesn't match 'eval_input_configs' or
@@ -385,11 +421,13 @@ def check_and_parse_input_config_key(configs, key):
 
 def merge_external_params_with_configs(configs, hparams=None, kwargs_dict=None):
   """Updates `configs` dictionary based on supplied parameters.
+
   This utility is for modifying specific fields in the object detection configs.
   Say that one would like to experiment with different learning rates, momentum
   values, or batch sizes. Rather than creating a new config text file for each
   experiment, one can use a single base config file, and update particular
   values.
+
   There are two types of field overrides:
   1. Strategy-based overrides, which update multiple relevant configuration
   options. For example, updating `learning_rate` will update both the warmup and
@@ -424,6 +462,7 @@ def merge_external_params_with_configs(configs, hparams=None, kwargs_dict=None):
   `model.ssd.loss.hard_example_miner.max_negatives_per_positive` will update the
   hard example miner configuration for an SSD model config. Generic overrides
   are automatically detected based on the namespaced keys.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
@@ -431,8 +470,10 @@ def merge_external_params_with_configs(configs, hparams=None, kwargs_dict=None):
     kwargs_dict: Extra keyword arguments that are treated the same way as
       attribute/value pairs in `hparams`. Note that hyperparameters with the
       same names will override keyword arguments.
+
   Returns:
     `configs` dictionary.
+
   Raises:
     ValueError: when the key string doesn't match any of its allowed formats.
   """
@@ -458,13 +499,16 @@ def merge_external_params_with_configs(configs, hparams=None, kwargs_dict=None):
 
 def _maybe_update_config_with_key_value(configs, key, value):
   """Checks key type and updates `configs` with the key value pair accordingly.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
     key: String indicates the field(s) to be updated.
     value: Value used to override existing field value.
+
   Returns:
     A boolean value that indicates whether the override succeeds.
+
   Raises:
     ValueError: when the key string doesn't match any of the formats above.
   """
@@ -513,10 +557,13 @@ def _maybe_update_config_with_key_value(configs, key, value):
 
 def _update_tf_record_input_path(input_config, input_path):
   """Updates input configuration to reflect a new input path.
+
   The input_config object is updated in place, and hence not returned.
+
   Args:
     input_config: A input_reader_pb2.InputReader.
     input_path: A path to data or list of paths.
+
   Raises:
     TypeError: if input reader type is not `tf_record_input_reader`.
   """
@@ -538,6 +585,7 @@ def update_input_reader_config(configs,
                                value=None,
                                path_updater=_update_tf_record_input_path):
   """Updates specified input reader config field.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
@@ -550,6 +598,7 @@ def update_input_reader_config(configs,
     value: Value used to override existing field value.
     path_updater: helper function used to update the input path. Only used when
       field_name is "input_path".
+
   Raises:
     ValueError: when input field_name is None.
     ValueError: when input_name is None and number of eval_input_readers does
@@ -592,14 +641,17 @@ def update_input_reader_config(configs,
 
 def _update_initial_learning_rate(configs, learning_rate):
   """Updates `configs` to reflect the new initial learning rate.
+
   This function updates the initial learning rate. For learning rate schedules,
   all other defined learning rates in the pipeline config are scaled to maintain
   their same ratio with the initial learning rate.
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
     learning_rate: Initial learning rate for optimizer.
+
   Raises:
     TypeError: if optimizer type is not supported, or if learning rate type is
       not supported.
@@ -643,7 +695,9 @@ def _update_initial_learning_rate(configs, learning_rate):
 
 def _update_batch_size(configs, batch_size):
   """Updates `configs` to reflect the new training batch size.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
@@ -660,6 +714,7 @@ def _validate_message_has_field(message, field):
 
 def _update_generic(configs, key, value):
   """Update a pipeline configuration parameter based on a generic key/value.
+
   Args:
     configs: Dictionary of pipeline configuration protos.
     key: A string key, dot-delimited to represent the argument key.
@@ -668,6 +723,7 @@ def _update_generic(configs, key, value):
       type for the protocol buffer. Note that setting the wrong type will
       result in a TypeError.
       e.g. 42
+
   Raises:
     ValueError if the message key does not match the existing proto fields.
     TypeError the value type doesn't match the protobuf field type.
@@ -685,13 +741,16 @@ def _update_generic(configs, key, value):
 
 def _update_momentum_optimizer_value(configs, momentum):
   """Updates `configs` to reflect the new momentum value.
+
   Momentum is only supported for RMSPropOptimizer and MomentumOptimizer. For any
   other optimizer, no changes take place. The configs dictionary is updated in
   place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
     momentum: New momentum value. Values are clipped at 0.0 and 1.0.
+
   Raises:
     TypeError: If the optimizer type is not `rms_prop_optimizer` or
     `momentum_optimizer`.
@@ -710,13 +769,17 @@ def _update_momentum_optimizer_value(configs, momentum):
 
 def _update_classification_localization_weight_ratio(configs, ratio):
   """Updates the classification/localization weight loss ratio.
+
   Detection models usually define a loss weight for both classification and
   objectness. This function updates the weights such that the ratio between
   classification weight to localization weight is the ratio provided.
   Arbitrarily, localization weight is set to 1.0.
+
   Note that in the case of Faster R-CNN, this same ratio is applied to the first
   stage objectness loss weight relative to localization loss weight.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
@@ -752,11 +815,14 @@ def _get_classification_loss(model_config):
 
 def _update_focal_loss_gamma(configs, gamma):
   """Updates the gamma value for a sigmoid focal loss.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
     gamma: Exponent term in focal loss.
+
   Raises:
     TypeError: If the classification loss is not `weighted_sigmoid_focal`.
   """
@@ -770,11 +836,14 @@ def _update_focal_loss_gamma(configs, gamma):
 
 def _update_focal_loss_alpha(configs, alpha):
   """Updates the alpha value for a sigmoid focal loss.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
     alpha: Class weight multiplier for sigmoid loss.
+
   Raises:
     TypeError: If the classification loss is not `weighted_sigmoid_focal`.
   """
@@ -804,7 +873,9 @@ def _update_all_eval_input_configs(configs, field, value):
 
 def _update_label_map_path(configs, label_map_path):
   """Updates the label map path for both train and eval input readers.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
@@ -816,7 +887,9 @@ def _update_label_map_path(configs, label_map_path):
 
 def _update_mask_type(configs, mask_type):
   """Updates the mask type for both train and eval input readers.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
@@ -829,7 +902,9 @@ def _update_mask_type(configs, mask_type):
 
 def _update_use_moving_averages(configs, use_moving_averages):
   """Updates the eval config option to use or not use moving averages.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().
@@ -841,7 +916,9 @@ def _update_use_moving_averages(configs, use_moving_averages):
 
 def _update_retain_original_images(eval_config, retain_original_images):
   """Updates eval config with option to retain original images.
+
   The eval_config object is updated in place, and hence not returned.
+
   Args:
     eval_config: A eval_pb2.EvalConfig.
     retain_original_images: Boolean indicating whether to retain original images
@@ -852,7 +929,9 @@ def _update_retain_original_images(eval_config, retain_original_images):
 
 def _update_use_bfloat16(configs, use_bfloat16):
   """Updates `configs` to reflect the new setup on whether to use bfloat16.
+
   The configs dictionary is updated in place, and hence not returned.
+
   Args:
     configs: Dictionary of configuration objects. See outputs from
       get_configs_from_pipeline_file() or get_configs_from_multiple_files().

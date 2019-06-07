@@ -9,7 +9,7 @@
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions andg
+# See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
 
@@ -41,7 +41,7 @@ def build(optimizer_config):
     learning_rate = _create_learning_rate(config.learning_rate)
     summary_vars.append(learning_rate)
     optimizer = tf.train.RMSPropOptimizer(
-        learning_rate * hvd.size(),
+        learning_rate,
         decay=config.decay,
         momentum=config.momentum_optimizer_value,
         epsilon=config.epsilon)
@@ -53,13 +53,13 @@ def build(optimizer_config):
     optimizer = tf.train.MomentumOptimizer(
         learning_rate * hvd.size(),
         momentum=config.momentum_optimizer_value)
-    # optimizer = hvd.DistributedOptimizer(optimizer)
+    optimizer = hvd.DistributedOptimizer(optimizer)
 
   if optimizer_type == 'adam_optimizer':
     config = optimizer_config.adam_optimizer
     learning_rate = _create_learning_rate(config.learning_rate)
     summary_vars.append(learning_rate)
-    optimizer = tf.train.AdamOptimizer(learning_rate * hvd.size())
+    optimizer = tf.train.AdamOptimizer(learning_rate)
 
   if optimizer is None:
     raise ValueError('Optimizer %s not supported.' % optimizer_type)
@@ -92,12 +92,15 @@ def _create_learning_rate(learning_rate_config):
 
   if learning_rate_type == 'exponential_decay_learning_rate':
     config = learning_rate_config.exponential_decay_learning_rate
-    learning_rate = tf.train.exponential_decay(
-        config.initial_learning_rate,
+    learning_rate = learning_schedules.exponential_decay_with_burnin(
         tf.train.get_or_create_global_step(),
+        config.initial_learning_rate,
         config.decay_steps,
         config.decay_factor,
-        staircase=config.staircase, name='learning_rate')
+        burnin_learning_rate=config.burnin_learning_rate,
+        burnin_steps=config.burnin_steps,
+        min_learning_rate=config.min_learning_rate,
+        staircase=config.staircase)
 
   if learning_rate_type == 'manual_step_learning_rate':
     config = learning_rate_config.manual_step_learning_rate

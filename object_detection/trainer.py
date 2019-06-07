@@ -403,7 +403,7 @@ def train(create_tensor_dict_fn,
       init_saver = tf.train.Saver(available_var_map)
       def initializer_fn(sess):
         init_saver.restore(sess, train_config.fine_tune_checkpoint)
-        = initializer_fn
+        init_fn = initializer_fn
 
     total_loss = slim.learning.train(
         train_tensor,

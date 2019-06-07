@@ -1,0 +1,252 @@
+item {
+  id: 1
+  name: 'MarlboroFineTouchLightBlue'
+}
+item {
+  id: 2
+  name: 'MarlboroFlavorMix'
+}
+item {
+  id: 3
+  name: 'MarlboroGold'
+}
+item {
+  id: 4
+  name: 'MarlboroMicro'
+}
+item {
+  id: 5
+  name: 'MarlboroRed'
+}
+item {
+  id: 6
+  name: 'MarlboroSilver'
+}
+item {
+  id: 7
+  name: 'MarlboroTouchBlue'
+}
+item {
+  id: 8
+  name: 'MurattiGreen'
+}
+item {
+  id: 9
+  name: 'MurattiPeach'
+}
+item {
+  id: 10
+  name: 'MurattiPink'
+}
+item {
+  id: 11
+  name: 'MurattiGreen_2019'
+}
+item {
+  id: 12
+  name: 'MurattiPeach_2019'
+}
+item {
+  id: 13
+  name: 'MurattiPink_2019'
+}
+item {
+  id: 14
+  name: 'MurattyViolet'
+}
+item {
+  id: 15
+  name: 'LMBlueLabel'
+}
+item {
+  id: 16
+  name: 'LMFineCutSilver'
+}
+item {
+  id: 17
+  name: 'LMLoftBlue'
+}
+item {
+  id: 18
+  name: 'LMLoftDoubleSplash'
+}
+item {
+  id: 19
+  name: 'LMLoftMix'
+}
+item {
+  id: 20
+  name: 'LMLoftNightBlue'
+}
+item {
+  id: 21
+  name: 'LMLoftSeaBlue'
+}
+item {
+  id: 22
+  name: 'LMSmartSeriesRed'
+}
+item {
+  id: 23
+  name: 'PhilipMorrisBlue'
+}
+item {
+  id: 24
+  name: 'PhilipMorrisBlue25'
+}
+item {
+  id: 25
+  name: 'PhilipMorrisGold'
+}
+item {
+  id: 26
+  name: 'PhilipMorrisNovelBlue'
+}
+item {
+  id: 27
+  name: 'PhilipMorrisNovelMix'
+}
+item {
+  id: 28
+  name: 'PhilipMorrisNovelRed'
+}
+item {
+  id: 29
+  name: 'PhilipMorrisNovelSilver'
+}
+item {
+  id: 30
+  name: 'PhilipMorrisRed'
+}
+item {
+  id: 31
+  name: 'PhilipMorrisRed25'
+}
+item {
+  id: 32
+  name: 'PhilipMorrisRedKingSize'
+}
+item {
+  id: 33
+  name: 'ParliamentAquaBlue'
+}
+item {
+  id: 34
+  name: 'ParliamentAquaSuperSlims'
+}
+item {
+  id: 35
+  name: 'ParliamentCaratBlue'
+}
+item {
+  id: 36
+  name: 'ParliamentCaratPurple'
+}
+item {
+  id: 37
+  name: 'ParliamentNightBlue'
+}
+item {
+  id: 38
+  name: 'ParliamentPearlBlue'
+}
+item {
+  id: 39
+  name: 'ParliamentPlatinum'
+}
+item {
+  id: 40
+  name: 'ParliamentSilverBlue'
+}
+item {
+  id: 41
+  name: 'ParliamentSilverSuperSlims'
+}
+item {
+  id: 42
+  name: 'NextPink'
+}
+item {
+  id: 43
+  name: 'NextViolet'
+}
+item {
+  id: 44
+  name: 'BondBlue#6'
+}
+item {
+  id: 45
+  name: 'BondBlueSelection'
+}
+item {
+  id: 46
+  name: 'BondBlueSelection25'
+}
+item {
+  id: 47
+  name: 'BondPremiumMix'
+}
+item {
+  id: 48
+  name: 'BondPremiumSilver'
+}
+item {
+  id: 49
+  name: 'BondRedSelection'
+}
+item {
+  id: 50
+  name: 'BondRedSelection25'
+}
+item {
+  id: 51
+  name: 'BondSilverClassic'
+}
+item {
+  id: 52
+  name: 'BondSilverClassic25'
+}
+item {
+  id: 53
+  name: 'BondBlue#6_2019'
+}
+item {
+  id: 54
+  name: 'BondBlueSelection_2019'
+}
+item {
+  id: 55
+  name: 'BondBlueSelection25_2019'
+}
+item {
+  id: 56
+  name: 'BondPremiumSilver_2019'
+}
+item {
+  id: 57
+  name: 'BondRedSelection_2019'
+}
+item {
+  id: 58
+  name: 'BondRedSelection25_2019'
+}
+item {
+  id: 59
+  name: 'BondSilverClassic_2019'
+}
+item {
+  id: 60
+  name: 'BondSilverClassic25_2019'
+}
+item {
+  id: 61
+  name: 'ChesterfieldKSBlue'
+}
+item {
+  id: 62
+  name: 'ChesterfieldKSBronze'
+}
+item {
+  id: 63
+  name: 'ChesterfieldKSRed'
+}

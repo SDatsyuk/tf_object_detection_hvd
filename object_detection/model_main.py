@@ -65,9 +65,10 @@ def main(unused_argv):
   flags.mark_flag_as_required('pipeline_config_path')
 
   session_config = tf.ConfigProto()
+  session_config.gpu_options.allow_growth = True
   session_config.gpu_options.visible_device_list = str(hvd.local_rank())
 
-  config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir, session_config=session_config)
+  config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir if hvd.rank() == 0 else None, session_config=session_config)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
       run_config=config,
@@ -108,8 +109,6 @@ def main(unused_argv):
         predict_input_fn,
         train_steps,
         eval_on_train_data=False)
-
-    hooks = [hvd.BroadcastGlobalVariablesHook(0)]
 
     # Currently only a single Eval Spec is allowed.
     tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[0], train_hooks)

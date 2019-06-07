@@ -33,7 +33,7 @@ from object_detection.builders import optimizer_builder
 from object_detection.core import standard_fields as fields
 from object_detection.utils import config_util
 from object_detection.utils import label_map_util
-from object_detection.utils import shape_utils
+from object_detection.utils import shape_utils 
 from object_detection.utils import variables_helper
 from object_detection.utils import visualization_utils as vis_utils
 
@@ -370,16 +370,20 @@ def create_model_fn(detection_model_fn, configs, hparams, use_tpu=False):
       summaries = [] if use_tpu else None
       if train_config.summarize_gradients:
         summaries = ['gradients', 'gradient_norm', 'global_gradient_norm']
-      train_op = tf.contrib.layers.optimize_loss(
-          loss=total_loss,
-          global_step=global_step,
-          learning_rate=None,
-          clip_gradients=clip_gradients_value,
-          optimizer=training_optimizer,
-          update_ops=detection_model.updates(),
-          variables=trainable_variables,
-          summaries=summaries,
-          name='')  # Preventing scope prefix on all variables.
+      # train_op = tf.contrib.layers.optimize_loss(
+      #     loss=total_loss,
+      #     global_step=global_step,
+      #     learning_rate=None,
+      #     clip_gradients=clip_gradients_value,
+      #     optimizer=training_optimizer,
+      #     update_ops=detection_model.updates(),
+      #     variables=trainable_variables,
+      #     summaries=summaries,
+      #     name='')  # Preventing scope prefix on all variables.
+      train_op = training_optimizer.minimize(
+              loss=total_loss,
+              global_step=global_step
+              )
 
     if mode == tf.estimator.ModeKeys.PREDICT:
       exported_output = exporter_lib.add_output_tensor_nodes(detections)

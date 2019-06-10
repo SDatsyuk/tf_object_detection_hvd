@@ -19,6 +19,7 @@ import tensorflow as tf
 from object_detection.utils import learning_schedules
 
 import horovod.tensorflow as hvd
+hvd.init()
 
 def build(optimizer_config):
   """Create optimizer based on config.

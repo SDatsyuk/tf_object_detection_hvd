@@ -765,7 +765,7 @@ def _copy_extra_fields(boxlist_to_copy_to, boxlist_to_copy_from):
 
 
 def to_normalized_coordinates(boxlist, height, width,
-                              check_range=True, scope=None):
+                              check_range=False, scope=None):
   """Converts absolute box coordinates to normalized coordinates in [0, 1].
 
   Usually one uses the dynamic shape of the image or conv-layer tensor:

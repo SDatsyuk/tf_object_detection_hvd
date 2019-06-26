@@ -25,7 +25,7 @@ import tensorflow as tf
 import horovod.tensorflow as hvd
 
 import model_hparams 
-import model_lib
+import model_lib 
 
 hvd.init()
 
@@ -111,7 +111,7 @@ def main(unused_argv):
         eval_on_train_data=False)
 
     # Currently only a single Eval Spec is allowed.
-    tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[0], train_hooks)
+    tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[0])
 
 
 if __name__ == '__main__':

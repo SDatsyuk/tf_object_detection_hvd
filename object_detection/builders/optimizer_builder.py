@@ -30,7 +30,7 @@ def build(optimizer_config):
   Returns:
     An optimizer and a list of variables for summary.
 
-  Raises:
+  Raises: 
     ValueError: when using an unsupported input data type.
   """
   optimizer_type = optimizer_config.WhichOneof('optimizer')

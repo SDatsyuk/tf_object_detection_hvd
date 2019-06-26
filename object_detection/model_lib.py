@@ -340,7 +340,7 @@ def create_model_fn(detection_model_fn, configs, hparams, use_tpu=False):
       # can write learning rate summaries on TPU without host calls.
       global_step = tf.train.get_or_create_global_step()
       training_optimizer, optimizer_summary_vars = optimizer_builder.build(
-          train_config.optimizer)
+          train_config.optimizer) 
 
     if mode == tf.estimator.ModeKeys.TRAIN:
       if use_tpu:
